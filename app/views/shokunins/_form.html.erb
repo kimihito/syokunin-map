@@ -17,8 +17,8 @@
 
 <ul>
   <% @shokunin.profiles.each do |profile| %>
-    <%= content_tag :li, data: profile, class: :past_profiles do %>
-      <div><%= profile.active ? 'o' : 'x' %>-<%= profile.name %></div>
+    <%= content_tag :li, data: profile.as_json, class: :past_profiles do %>
+      <div><%= '(削除)' unless profile.active? %>-<%= profile.name %></div>
       <div><%= profile.contact %></div>
       <div><%= profile.content %></div>
     <% end %>
