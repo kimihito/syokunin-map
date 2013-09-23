@@ -1,5 +1,8 @@
 SyokuninMap::Application.routes.draw do
   get '/', to: 'index#index'
+  resources :prefectures, only: :show, shallow: true do
+    resources :shokunins
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

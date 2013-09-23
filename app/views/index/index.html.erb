@@ -21,7 +21,7 @@ $(function(){
 <div id='shokunins'>
   <% @prefectures.each do |pref| %>
     <div id='pref<%= pref.id %>'>
-      <h1><%= pref.name %></h1>
+      <h1><%= pref.name %><%= link_to 'edit', prefecture_path(pref) %></h1>
       <ul>
         <% pref.shokunins.active.each do |shokunin| %>
           <li>

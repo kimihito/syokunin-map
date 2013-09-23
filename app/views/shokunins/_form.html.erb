@@ -1,0 +1,26 @@
+<h1><%= @prefecture.name %></h1>
+<%= form_for url do |f| %>
+  name
+  <%= text_field_tag 'shokunin[name]', @profile.name %>
+  <br>
+  contact
+  <%= text_field_tag 'shokunin[contact]', @profile.contact %>
+  <br>
+  content
+  <%= text_area_tag 'shokunin[content]', @profile.content %>
+  <br>
+  active
+  <%= check_box_tag 'shokunin[active]', true, ({checked: true} if @profile.active?) %>
+  <br>
+  <%= submit_tag %>
+<% end %>
+
+<ul>
+  <% @shokunin.profiles.each do |profile| %>
+    <%= content_tag :li, data: profile, class: :past_profiles do %>
+      <div><%= profile.active ? 'o' : 'x' %>-<%= profile.name %></div>
+      <div><%= profile.contact %></div>
+      <div><%= profile.content %></div>
+    <% end %>
+  <% end %>
+</ul>

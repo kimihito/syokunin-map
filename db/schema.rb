@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20130923024241) do
   create_table "shokunins", force: true do |t|
     t.integer  "prefecture_id"
     t.integer  "profile_id"
+    t.boolean  "active"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

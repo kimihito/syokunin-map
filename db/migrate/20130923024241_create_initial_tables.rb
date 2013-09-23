@@ -6,6 +6,7 @@ class CreateInitialTables < ActiveRecord::Migration
     create_table :shokunins do |t|
       t.references :prefecture
       t.references :profile
+      t.boolean :active
       t.timestamps
     end
     create_table :profiles do |t|

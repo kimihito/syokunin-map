@@ -1,0 +1,16 @@
+<h1><%= @prefecture.name %></h1>
+<%= link_to '新規作成', new_prefecture_shokunin_path(@prefecture) %>
+<ul>
+<% @shokunins.each do |shokunin| %>
+  <li>
+    <div class=name>
+      <%= link_to edit_shokunin_path(shokunin) do %>
+        <%= '(削除)' unless shokunin.active? %>
+        <%= shokunin.profile.name %>
+      <% end %>
+    </div>
+    <div class=contact><%= shokunin.profile.contact %></div>
+    <div class=content><%= shokunin.profile.content %></div>
+  </li>
+<% end %>
+</ul>
