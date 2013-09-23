@@ -1,0 +1,15 @@
+<script src='/assets/application.js'></script>
+<script>
+
+$(function(){
+  $('#foobar').on('pref-click',function(e,data){
+    $("<div>").text(data.pref.id+'#'+data.pref.name).insertAfter('#foobar');
+  });
+  $('#foobar').on('pref-move',function(e,data){})
+  $('#foobar').on('pref-leave',function(e,data){})
+});
+
+</script>
+<div id='foobar' class='japan-svg-map' data-width='400' data-height='440' data-src='/assets/japan.svg' data-pref-color='{"1":"red","2":"blue"}' style='background:#eef'>
+  <div style='line-height:440px;text-align:center'>loading...</div>
+</div>
