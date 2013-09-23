@@ -1,7 +1,13 @@
 <script>
 $(function(){
   $('#foobar').on('pref-click',function(e,data){
-    $("<div>").text(data.pref.id+'#'+data.pref.name).insertAfter('#foobar');
+    function callback(){
+      $('#shokunins > div.active').removeClass('active');
+      $('#pref'+data.pref.id).fadeIn();
+      $('#pref'+data.pref.id).addClass('active');
+    }
+    if($('#shokunins > div.active').size()==0)callback();
+    else $('#shokunins > div.active').fadeOut('fast',callback)
   });
   $('#foobar').on('pref-move',function(e,data){})
   $('#foobar').on('pref-leave',function(e,data){})
@@ -10,3 +16,38 @@ $(function(){
 <div id='foobar' class='japan-svg-map' data-width='400' data-height='440' data-src='/assets/japan.svg' data-pref-color='<%= @prefcount.to_json %>' style='background:#eef'>
   <div style='line-height:440px;text-align:center'>loading...</div>
 </div>
+
+
+<div id='shokunins'>
+  <% @prefectures.each do |pref| %>
+    <div id='pref<%= pref.id %>'>
+      <h1><%= pref.name %></h1>
+      <ul>
+        <% pref.shokunins.active.each do |shokunin| %>
+          <li>
+            <div><%= shokunin.profile.name %></div>
+            <div><%= shokunin.profile.contact %></div>
+            <div><%= shokunin.profile.content %></div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+</div>
+
+<style>
+#foobar{
+  float:left;
+  margin-right:20px;
+}
+#shokunins{
+  float:left;
+}
+#shokunins > div{
+  display:none;
+}
+#shokunins > div.active{
+  display:block;
+}
+
+</style>
