@@ -21,5 +21,6 @@ module SyokuninMap
     # config.i18n.default_locale = :de
     config.assets.precompile += ['*.svg']
     config.secret_key_base='hoge'
+    config.assets.paths << "#{Rails}/vendor/assets/fonts"
   end
 end

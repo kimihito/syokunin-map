@@ -13,9 +13,6 @@ $(function(){
   $('#foobar').on('pref-leave',function(e,data){})
 });
 </script>
-<div id='foobar' class='japan-svg-map' data-width='400' data-height='440' data-src='<%= image_path 'japan.svg' %>' data-pref-color='<%= @prefcount.to_json %>' style='background:#eef'>
-  <div style='line-height:440px;text-align:center'>loading...</div>
-</div>
 
 
 <div id='shokunins'>
@@ -35,9 +32,13 @@ $(function(){
   <% end %>
 </div>
 
+<div id='foobar' class='japan-svg-map' data-width='400' data-height='440' data-src='<%= image_path 'japan.svg' %>' data-pref-color='<%= @prefcount.to_json %>' style='background:#eef'>
+  <div style='line-height:440px;text-align:center'>loading...</div>
+</div>
+
 <style>
 #foobar{
-  float:left;
+  float:right;
   margin-right:20px;
 }
 #shokunins{
