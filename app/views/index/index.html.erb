@@ -11,32 +11,35 @@ $(function(){
   });
   $('#foobar').on('pref-move',function(e,data){})
   $('#foobar').on('pref-leave',function(e,data){})
+
+  $('.shokunin-info').popover();
+
 });
 </script>
 
-<div class="span4">
-  <button type="button" class="btn btn-default btn-lg">
-    <span class="glyphicon glyphicon-star"></span> Star
-  </button>
-  <div id='shokunins'>
-    <% @prefectures.each do |pref| %>
-      <div id='pref<%= pref.id %>'>
-        <h1><%= pref.name %><%= link_to 'edit', prefecture_path(pref) %></h1>
-        <ul>
-          <% pref.shokunins.active.each do |shokunin| %>
-            <li>
-              <div><%= shokunin.profile.name %></div>
-              <div><%= shokunin.profile.contact %></div>
-              <div><%= shokunin.profile.content %></div>
-            </li>
-          <% end %>
-        </ul>
+<div class="col-md-4" id='shokunins'>
+  <% @prefectures.each do |pref| %>
+    <div id='pref<%= pref.id %>'>
+      <h3><%= pref.name %>にいるハガキ職人一覧</h3>
+      <div style="width: 100%;">
+        <div style="float:right;">
+          <i class="glyphicon glyphicon-edit"></i><%= link_to 'ハガキ職人の追加・編集', prefecture_path(pref) %>
+        </div>
       </div>
-    <% end %>
-  </div>
+      <ul style="clear:right;">
+        <% pref.shokunins.active.each do |shokunin| %>
+          <li>
+          <div class="shokunin-info" data-toggle="popover" title="Contact : <%=shokunin.profile.contact %>" data-content="<%=shokunin.profile.content %>"><%= shokunin.profile.name %></div>
+            <div><%= shokunin.profile.contact %></div>
+            <div><%= shokunin.profile.content %></div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 </div>
 
-<div class="span8">
+<div class="col-md-8">
   <div id='foobar' class='japan-svg-map' data-width='600' data-height='660' data-src='<%= image_path 'japan.svg' %>' data-pref-color='<%= @prefcount.to_json %>' style='background:#eef'>
     <div style='line-height:440px;text-align:center'>loading...</div>
   </div>
