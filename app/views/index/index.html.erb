@@ -14,26 +14,32 @@ $(function(){
 });
 </script>
 
-
-<div id='shokunins'>
-  <% @prefectures.each do |pref| %>
-    <div id='pref<%= pref.id %>'>
-      <h1><%= pref.name %><%= link_to 'edit', prefecture_path(pref) %></h1>
-      <ul>
-        <% pref.shokunins.active.each do |shokunin| %>
-          <li>
-            <div><%= shokunin.profile.name %></div>
-            <div><%= shokunin.profile.contact %></div>
-            <div><%= shokunin.profile.content %></div>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<div class="span4">
+  <button type="button" class="btn btn-default btn-lg">
+    <span class="glyphicon glyphicon-star"></span> Star
+  </button>
+  <div id='shokunins'>
+    <% @prefectures.each do |pref| %>
+      <div id='pref<%= pref.id %>'>
+        <h1><%= pref.name %><%= link_to 'edit', prefecture_path(pref) %></h1>
+        <ul>
+          <% pref.shokunins.active.each do |shokunin| %>
+            <li>
+              <div><%= shokunin.profile.name %></div>
+              <div><%= shokunin.profile.contact %></div>
+              <div><%= shokunin.profile.content %></div>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
 </div>
 
-<div id='foobar' class='japan-svg-map' data-width='400' data-height='440' data-src='<%= image_path 'japan.svg' %>' data-pref-color='<%= @prefcount.to_json %>' style='background:#eef'>
-  <div style='line-height:440px;text-align:center'>loading...</div>
+<div class="span8">
+  <div id='foobar' class='japan-svg-map' data-width='600' data-height='660' data-src='<%= image_path 'japan.svg' %>' data-pref-color='<%= @prefcount.to_json %>' style='background:#eef'>
+    <div style='line-height:440px;text-align:center'>loading...</div>
+  </div>
 </div>
 
 <style>
