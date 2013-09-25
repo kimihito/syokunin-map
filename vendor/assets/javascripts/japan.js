@@ -16,22 +16,29 @@ $(function(){
     if(height)$el.find('svg').attr('height',height);
     var prefColor=$el.data('pref-color');
     var $prefs=$el.find('path[data-id]');
+    var focused=null;
     $prefs.each(function(){
       $(this).attr('fill',prefColor[$(this).data('id')]);
     });
     $prefs.mouseleave(function(e){
       var id=$(this).data('id'),name=$(this).data('name');
-      $(this).attr({'stroke-width':''});
+      if(!focused||focused.data('id')!=id)$(this).attr('stroke-width','');
       $el.find('svg').css({cursor:'default'});
       $el.trigger('pref-leave',[{pref:{id:id,name:name}}]);
     });
     $prefs.click(function(e){
       var id=$(this).data('id'),name=$(this).data('name');
+      if(focused)focused.attr('stroke-width','');
+      focused=$(this);
+      focused.appendTo(focused.parent());
+      focused.attr('stroke-width',20);
       $el.trigger('pref-click',[{pref:{id:id,name:name},x:e.offsetX,y:e.offsetY}]);
     });
     $prefs.mouseenter(function(e){
       var id=$(this).data('id'),name=$(this).data('name');
-      $(this).attr({'stroke-width':20}).appendTo($(this).parent());
+      $(this).attr('stroke-width',20);
+      if(focused)$(this).insertBefore($(this).parent().children().last())
+      else $(this).appendTo($(this).parent());
       $el.find('svg').css({cursor:'pointer'});
       $el.trigger('pref-enter',[{pref:{id:id,name:name},x:e.offsetX,y:e.offsetY}]);
     });
