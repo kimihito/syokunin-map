@@ -21,11 +21,13 @@ class ShokuninsController < ApplicationController
   def create
     @shokunin = @prefecture.shokunins.create
     @shokunin.profiles.create shokunin_params
+    flash[:success] = "新しいハガキ職人が登録されました"
     redirect_to action: :edit, id: @shokunin.id
   end
 
   def update
     @shokunin.profiles.create shokunin_params
+    flash[:notice] = "ハガキ職人の情報を更新しました"
     redirect_to action: :edit
   end
 

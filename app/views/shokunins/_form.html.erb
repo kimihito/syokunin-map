@@ -1,26 +1,32 @@
-<h1><%= @prefecture.name %>にいるハガキ職人を登録する</h1>
-<%= form_for url do |f| %>
-  name
-  <%= text_field_tag 'shokunin[name]', @profile.name, class: "form-control" %>
-  <br>
-  contact
-  <%= text_field_tag 'shokunin[contact]', @profile.contact , class: "form-control"%>
-  <br>
-  content
-  <%= text_area_tag 'shokunin[content]', @profile.content, class: "form-control" %>
-  <br>
-  active
-  <%= check_box_tag 'shokunin[active]', true, ({checked: true} if @profile.active?) %>
-  <br>
-  <%= submit_tag %>
-<% end %>
-
-<ul>
-  <% @shokunin.profiles.each do |profile| %>
-    <%= content_tag :li, data: profile.as_json, class: :past_profiles do %>
-      <div><%= '(削除)' unless profile.active? %>-<%= profile.name %></div>
-      <div><%= profile.contact %></div>
-      <div><%= profile.content %></div>
-    <% end %>
+<div class="col-md-6">
+  <h2><%= @prefecture.name %>にいるハガキ職人を<%=title%>する</h2>
+  <%= form_for url do |f| %>
+    ラジオネーム
+    <%= text_field_tag 'shokunin[name]', @profile.name, class: "form-control" %>
+    <br>
+    TwitterアカウントやブログのURLなど
+    <%= text_field_tag 'shokunin[contact]', @profile.contact , class: "form-control"%>
+    <br>
+    主に投稿している番組
+    <%= text_area_tag 'shokunin[content]', @profile.content, class: "form-control" %>
+    <br>
+    active
+    <%= check_box_tag 'shokunin[active]', true, ({checked: true} if @profile.active?) %>
+    <br>
+    <%= submit_tag '完了する', class: "btn btn-default"  %>
   <% end %>
-</ul>
+</div>
+
+<% if title == "編集" %>
+  <div class="col-md-6">
+    <h2>編集履歴<small>クリックするとその編集の内容が反映されます</small></h2>
+    <ul>
+      <% @shokunin.profiles.each do |profile| %>
+        <%= content_tag :li, data: profile.as_json, class: :past_profiles do %> <div><%= '(削除)' unless profile.active? %>-<%= profile.name %></div>
+          <div><%= profile.contact %></div>
+          <div><%= profile.content %></div>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
