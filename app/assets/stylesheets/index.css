@@ -1,0 +1,14 @@
+#foobar{
+  float:right;
+  margin-right:20px;
+}
+#shokunins{
+  float:left;
+}
+#shokunins > div{
+  display:none;
+}
+
+#shokunins > div.active{
+  display:block;
+}

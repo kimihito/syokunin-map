@@ -1,37 +1,23 @@
-<script>
-$(function(){
-  $('#foobar').on('pref-click',function(e,data){
-    function callback(){
-      $('#shokunins > div.active').removeClass('active');
-      $('#pref'+data.pref.id).fadeIn();
-      $('#pref'+data.pref.id).addClass('active');
-    }
-    if($('#shokunins > div.active').size()==0)callback();
-    else $('#shokunins > div.active').fadeOut('fast',callback)
-  });
-  $('#foobar').on('pref-move',function(e,data){})
-  $('#foobar').on('pref-leave',function(e,data){})
-
-  $('.shokunin-info').popover();
-
-});
-</script>
-
 <div class="col-md-4" id='shokunins'>
+  <span>右の日本地図をクリックするとそこの職人が見えます</span>
   <% @prefectures.each do |pref| %>
     <div id='pref<%= pref.id %>'>
       <h3><%= pref.name %>にいるハガキ職人一覧</h3>
       <div style="width: 100%;">
-        <div style="float:right;">
+        <div style="float:right; margin-bottom: 10px;">
           <i class="glyphicon glyphicon-edit"></i><%= link_to 'ハガキ職人の追加・編集', prefecture_path(pref) %>
         </div>
       </div>
-      <ul style="clear:right;">
+      <ul style="clear:right;padding: 0;list-style: none;">
         <% pref.shokunins.active.each do |shokunin| %>
-          <li>
-          <div class="shokunin-info" data-toggle="popover" title="Contact : <%=shokunin.profile.contact %>" data-content="<%=shokunin.profile.content %>"><%= shokunin.profile.name %></div>
-            <div><%= shokunin.profile.contact %></div>
-            <div><%= shokunin.profile.content %></div>
+          <li style="background: #F4F4F4;margin-bottom: 5px;">
+            <div class="shokunin" style='font-size:23px;padding:5px;'>
+              <%= shokunin.profile.name %><span style="float:right;font-size:12px;padding-top: 15px;">クリックすると詳細が開きます</span>
+            </div>
+            <div class="shokunin-info" style="padding-left: 8px;display:none;">
+              <div>Twitterアカウント：<%= shokunin.profile.contact %></div>
+              <div>主な投稿番組：<%= shokunin.profile.content %></div>
+            </div>
           </li>
         <% end %>
       </ul>
@@ -45,19 +31,3 @@ $(function(){
   </div>
 </div>
 
-<style>
-#foobar{
-  float:right;
-  margin-right:20px;
-}
-#shokunins{
-  float:left;
-}
-#shokunins > div{
-  display:none;
-}
-#shokunins > div.active{
-  display:block;
-}
-
-</style>

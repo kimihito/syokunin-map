@@ -1,13 +1,13 @@
-<h1><%= @prefecture.name %></h1>
+<h1><%= @prefecture.name %>にいるハガキ職人を登録する</h1>
 <%= form_for url do |f| %>
   name
-  <%= text_field_tag 'shokunin[name]', @profile.name %>
+  <%= text_field_tag 'shokunin[name]', @profile.name, class: "form-control" %>
   <br>
   contact
-  <%= text_field_tag 'shokunin[contact]', @profile.contact %>
+  <%= text_field_tag 'shokunin[contact]', @profile.contact , class: "form-control"%>
   <br>
   content
-  <%= text_area_tag 'shokunin[content]', @profile.content %>
+  <%= text_area_tag 'shokunin[content]', @profile.content, class: "form-control" %>
   <br>
   active
   <%= check_box_tag 'shokunin[active]', true, ({checked: true} if @profile.active?) %>
